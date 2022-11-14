@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+  	<style>
+   		body{
+  			background: white;
+			}
+  	</style>
+    <title>Dot Plot: Goals: MessiVRonaldo</title>
+		<script 				 src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js">
+  	</script>
+		<script 				                 src="https://raw.githubusercontent.com/d3/d3-plugins/master/hexbin/hexbin.js">
+    </script>
+		<script 
+src="https://d3js.org/d3.v4.js">
+    </script>
+  </head>
+  <body>
+    <div id="my_dataviz"></div>
+  </body>
+  <script src="bundle.js"></script>
+  <script>
+    var plotscale = 750
+    var margin = {top: plotscale * (14.86/960) + 30, 
+              right: plotscale * (20/960), 
+              bottom: plotscale * (24/960) + 50, 
+              left: plotscale * (40/960) + 30},
+    width = plotscale - margin.left - margin.right,
+    height = plotscale * (68/105) - margin.top - margin.bottom;
+
+  // append the svg object to the body of the page
+  var svg = d3.select("#my_dataviz")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  // Parse the Data
+  d3.csv("https://gist.githubusercontent.com/Simon6HH/cdb6822c7a756603d910bc60d935465d/raw/6d938caff3f145c51768133119af15492ef0077c/data.csv", function(data) {
+
+
+    // Add X axis
+    var x = d3.scaleLinear()
+      .domain([0, 80])
+      .range([ 0, width]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+
+    // Y axis
+    var y = d3.scaleBand()
+      .range([ 0, height ])
+      .domain(data.map(function(d) { return d.Year; }))
+      .padding(1);
+    svg.append("g")
+      .call(d3.axisLeft(y))
+    
+    svg.append("text")
+      .attr('y', -20)
+      .attr('x', 170)
+      .attr('fill', 'black')
+      .text('Head to Head Goals per Season: Messi vs Ronaldo');
+
+    // Lines
+    svg.selectAll("myline")
+      .data(data)
+      .enter()
+      .append("line")
+        .attr("x1", function(d) { return x(d.Messi); })
+        .attr("x2", function(d) { return x(d.Ronaldo); })
+        .attr("y1", function(d) { return y(d.Year); })
+        .attr("y2", function(d) { return y(d.Year); })
+        .attr("stroke", "grey")
+        .attr("stroke-width", "1px")
+
+    // Circles of variable 1
+    svg.selectAll("mycircle")
+      .data(data)
+      .enter()
+        .append("circle")
+          .attr("cx", function(d) { return x(d.Messi); })
+          .attr("cy", function(d) { return y(d.Year); })
+          .attr("r", "6")
+          .style("fill", "#69b3a2")
+    
+    svg.selectAll("mycircle")
+      .data(data)
+      .enter()
+        .append("text")
+          .attr('x', 381.5)
+          .attr('y', -20)
+          .text("Messi")
+          .style("fill", "#69b3a2")
+        .on("click", function(d){
+          currentOpacity = d3.selectAll("." + d.Messi).style("opacity")
+          d3.selectAll("." + d.Messi).transition().style("opacity", currentOpacity == 1 ? 0:1)
+        })
+
+    // Circles of variable 2
+    svg.selectAll("mycircle")
+      .data(data)
+      .enter()
+      .append("circle")
+        .attr("cx", function(d) { return x(d.Ronaldo); })
+        .attr("cy", function(d) { return y(d.Year); })
+        .attr("r", "6")
+        .style("fill", "#4C4082")
+    
+     svg.selectAll("mycircle")
+      .data(data)
+      .enter()
+        .append("text")
+          .attr('x', 442)
+          .attr('y', -20)
+          .text("Ronaldo")
+          .style("fill", "#4C4082")
+        .on("click", function(d){
+          currentOpacity = d3.selectAll("." + d.Ronaldo).style("opacity")
+          d3.selectAll("." + d.Ronaldo).transition().style("opacity", currentOpacity == 1 ? 0:1)
+        })
+    
+    // FOOTBALL FIELD CODE BELOW THIS 
+    
+    var x = d3.scale.linear()
+      .domain([0, 100])
+      .range([0, width]);
+
+    var y = d3.scale.linear()
+      .domain([0, 100])
+      .range([height, 0]);
+    
+    ///////////////////////
+    // add lines 
+
+    // field outline    
+      svg.append("rect")
+         .attr("id","outline")
+         .attr("x", 0)
+         .attr("y", 0)
+         .attr("width", width)
+         .attr("height", height)
+         .attr("fill", "none")
+         .attr("stroke", "black")
+         .style("stroke-width", 0.5);
+    // right penalty area 
+      svg.append("rect")
+         .attr("id","six")
+         .attr("x", x(83))
+         .attr("y", y(78.9))
+         .attr("width", x(100) - x(83))
+         .attr("height", y(21.1) - y(78.9))
+         .attr("fill", "none")
+         .attr("stroke", "black")
+         .style("stroke-width", 0.5);
+    // right six yard box
+      svg.append("rect")
+        .attr("id","penarea")
+        .attr("x", x(94.2))
+        .attr("y", y(63.2))
+        .attr("width", x(100) - x(94.2))
+        .attr("height", y(36.8) - y(63.2))
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+    // right goal
+      svg.append("rect")
+        .attr("id","penarea")
+        .attr("x", x(100))
+        .attr("y", y(54.8))
+        .attr("width", margin.right)
+        .attr("height", y(45.2) - y(54.8))
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+
+    // left penalty area 
+      svg.append("rect")
+         .attr("id","six")
+         .attr("x", x(0))
+         .attr("y", y(78.9))
+         .attr("width", x(100) - x(83))
+         .attr("height", y(21.1) - y(78.9))
+         .attr("fill", "none")
+         .attr("stroke", "black")
+         .style("stroke-width", 0.5);
+    // six yard box
+      svg.append("rect")
+        .attr("id","penarea")
+        .attr("x", x(0))
+        .attr("y", y(63.2))
+        .attr("width", x(100) - x(94.2))
+        .attr("height", y(36.8) - y(63.2))
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+
+    // 50 yd line
+       svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(50))
+        .attr("x2", x(50))
+        .attr("y1", y(0))
+        .attr("y2", y(100))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+
+    // center circle
+      svg.append("circle")
+         .attr("cx", x(50))
+         .attr("cy", y(50))
+         .attr("r", x(10))
+         .attr("fill", "none")
+         .attr("stroke", "black")
+         .style("stroke-width", 0.5);
+    })
+  </script>
+</html>
