@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+<html>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<head>
+    <meta charset="utf-8">
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+        *{
+            margin:0;
+            padding:0;
+        }
+        html,
+        body{
+            height: 100%;
+            padding: 0;
+            scroll-behavior: smooth;
+            background: #f7f5f2;
+            color: #666;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 200;
+        }
+        h2{
+            line-height: 1.25;
+            padding-top: 45px;
+            font-weight: 300;
+            font-size: 20px;
+        }
+        svg{
+            padding: 20px;
+        }
+        text{
+            font-size: 10px;
+        }
+        strong{
+            font-weight: 600;
+        }
+        #graphic {
+            max-width:  1440px;
+            width: 100%;
+            position:   relative;
+            height:  100%;
+            position:  relative;
+            margin:auto;
+        }
+        .container {
+            height: 100%;
+            max-width: 550px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            height: 100%;
+            line-height: 1.5;
+            left: 650px;
+        }
+        .container div {
+            height: 100%;
+            display: block;
+            padding: 0 140px;
+        }
+        .fixed {
+            display: inline-block;
+            position: fixed;
+            max-width: 500px;
+            height: 500px;
+            top: 50px;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+
+
+<body>
+<section>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://raw.githubusercontent.com/d3/d3-plugins/master/hexbin/hexbin.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+
+</section>
+
+<div id="graphic">
+    <div class="container">
+        <div style = "padding-top: 80px;" id="div1">
+            <h2><strong>Total Career Trophies</strong> is perhaps one of the best ways to show just how good a player is. The more trophies one has, the more they have accomplished collectively. Funny to see that Messi's teammate is in first place. Dani Alves who played with Messi during a time where they won almost every trophy they possibly could.
+            <br><strong>Messi Ranked 2nd.</strong></br><br>
+                <strong>(Scroll Down)</strong> 
+            </h2>
+        </div>
+        <div id="div2">
+            <h2><strong>Most Career Goals</strong> as a forward is a very important figure. It shows if you consistently make a difference for your team. Lionel Messi who is a forward but has slowly progressed into a more central and lower role has seen a decent drop in goals . . . or so we thought. This year has been a re-emergence of Messi's hunger for goals and he is putting numbers up as if he was in his prime again at 25. Despite being ranked 3rd, the next couple of seasons will see Messi reach 1st at an impressive speed.
+            <br><strong>Messi Ranked 3rd.</strong></br><br>
+                <strong>(Scroll Down)</strong> 
+            </h2>
+        </div>
+        <div id="div3">
+            <h2><strong>Most Career Assists</strong> as a forward is not something that should be overlooked. Midfielders and wingers are the ones who put up high assist numbers, not one of the most prolific goal scorers of all time. Seven out of the ten on this list are midfielders who have been playing a role that only judges them based on assists. The fact that Messi has topped this list and is going for most career goals at the same time is just another reason why he is such a complete player.
+            <br><strong>Messi Ranked 1st.</strong></br><br>
+                <strong>(Scroll Down)</strong> 
+            </h2>
+        </div>
+        <div id="div4">
+            <h2><strong>Most Career Goals and Assists</strong> is an interesting look at how an elite player performs. To provide and to capitalize chances marks a remarkable player. For those that have heard of Pele, 3 time World Cup champion with countless goals, meet Messi. November 2022 saw Messi take over the legendary Pele as having the most goals and assists in the history of football. An achievement that should be hailed as one of the greatest records to have ever have been beaten. An incredible achievement that speaks volume as to who Messi is as a player.
+            <br><strong>Messi Ranked 1st.</strong></br><br>
+                <strong>(Scroll Down)</strong> 
+            </h2>
+        </div>
+        <div id="div5">
+            <h2 style = "padding-top: 80px;"><strong>Most Man of the Match Awards</strong> is not a statistic that many deam as important. However, to qualify as a "Man of the Match" means out of 22 starting players + substitutes, that player outperforms each and every one of them in every category. To be the best player on the pitch is an incredible achievement as today's leagues and quality of players are beyond any generations. Lionel Messi, has achieved this in over a third of the games that he has played at the professional level. Game to game, if Messi is on the pitch, you know he will be the best at everything he does.
+            <br><strong>Messi Ranked 1st.</strong></br><br>
+            </h2>
+        </div>
+
+    </div>
+
+    <div class="fixed" id="my_dataviz"></div>
+
+</div><!-- /graphic -->
+<script>
+
+    var plotscale = 750
+    var margin = {top: plotscale * (14.86/960), 
+              right: plotscale * (20/960), 
+              bottom: plotscale * (24/960) + 60, 
+              left: plotscale * (40/960) + 30},
+    width = plotscale - margin.left - margin.right,
+    height = plotscale * (68/105) - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg2 = d3.select("#my_dataviz")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+let grid1 = () =>{
+    d3.select("svg2").remove()
+}
+
+let trophies = () =>{
+    // Parse the Data
+d3.csv("https://gist.githubusercontent.com/simonalt/7be5539d81bf75c7ed487637b47ee90f/raw/86647874a5053aab698adf9d2c801f3f8ba79a73/trophies.csv", function(data) {
+
+    // X axis
+  var x2 = d3.scaleBand()
+    .range([ 0, width ])
+    .domain(data.map(function(d) { return d.Name; }))
+    .padding(0.2);
+  svg2.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x2))
+    .selectAll("text")
+        .attr('fill', 'black')
+      .attr("transform", "translate(-10,0)rotate(-45)")
+      .style("text-anchor", "end");
+
+  // Add Y axis
+  var y2 = d3.scaleLinear()
+    .domain([30, 45])
+    .range([ height, 0]);
+  svg2.append("g")
+    .call(d3.axisLeft(y2));
+
+  svg2.append("text")
+    .attr('y', -40)
+    .attr('x', -270)
+    .attr('fill', 'black')
+    .attr('transform', 'rotate(270 0 0)')
+    .text('Total Career Trophies');
+
+  // Bars
+  svg2.selectAll("mybar")
+    .data(data)
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return x2(d.Name); })
+      .attr("width", x2.bandwidth())
+        // .attr("fill", function(d) {
+        // if (d = 41) {
+        // return "red";
+        // } else if (d != 41) {
+        // return "green";
+        // }
+        // return "green";
+        // })
+      //.attr("fill", "#69b3a2")
+        .attr("fill", "green")
+      // no bar at the beginning thus:
+      .attr("height", function(d) { return height - y2(0); }) // always equal to 0
+      .attr("y", function(d) { return y2(0); })
+
+  // Animation
+  svg2.selectAll("rect")
+    .transition()
+    .duration(800)
+    .attr("y", function(d) { return y2(d.Trophies); })
+    .attr("height", function(d) { return height - y2(d.Trophies); })
+    .delay(function(d,i){console.log(i) ; return(i*100)})
+  
+  // FOOTBALL FIELD CODE BELOW THIS
+  
+  var x = d3.scale.linear()
+    .domain([0, 100])
+    .range([0, width]);
+
+  var y = d3.scale.linear()
+    .domain([0, 100])
+    .range([height, 0]);
+
+  svg2.append("clipPath")
+    .attr("id", "clip")
+    .append("rect")
+    .attr("class", "mesh")
+    .attr("width", width)
+    .attr("height", height);
+
+  ///////////////////////
+  // add lines 
+
+  // field outline    
+    svg2.append("rect")
+       .attr("id","outline")
+       .attr("x", 0)
+       .attr("y", 0)
+       .attr("width", width)
+       .attr("height", height)
+       .attr("fill", "none")
+       .attr("stroke", "black")
+       .style("stroke-width", 0.5);
+  // right penalty area 
+    svg2.append("rect")
+       .attr("id","six")
+       .attr("x", x(83))
+       .attr("y", y(78.9))
+       .attr("width", x(100) - x(83))
+       .attr("height", y(21.1) - y(78.9))
+       .attr("fill", "none")
+       .attr("stroke", "black")
+         .style("stroke-width", 0.5);
+  // right six yard box
+    svg2.append("rect")
+      .attr("id","penarea")
+      .attr("x", x(94.2))
+      .attr("y", y(63.2))
+      .attr("width", x(100) - x(94.2))
+      .attr("height", y(36.8) - y(63.2))
+      .attr("fill", "none")
+      .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+  // right goal
+    svg2.append("rect")
+      .attr("id","penarea")
+      .attr("x", x(100))
+      .attr("y", y(54.8))
+      .attr("width", margin.right)
+      .attr("height", y(45.2) - y(54.8))
+      .attr("fill", "none")
+      .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+
+  // left penalty area 
+    svg2.append("rect")
+       .attr("id","six")
+       .attr("x", x(0))
+       .attr("y", y(78.9))
+       .attr("width", x(100) - x(83))
+       .attr("height", y(21.1) - y(78.9))
+       .attr("fill", "none")
+       .attr("stroke", "black")
+         .style("stroke-width", 0.5);
+  // six yard box
+    svg2.append("rect")
+      .attr("id","penarea")
+      .attr("x", x(0))
+      .attr("y", y(63.2))
+      .attr("width", x(100) - x(94.2))
+      .attr("height", y(36.8) - y(63.2))
+      .attr("fill", "none")
+      .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+
+  // 50 yd line
+     svg2.append("line")
+      .attr("id","half")
+      .attr("x1", x(50))
+      .attr("x2", x(50))
+      .attr("y1", y(0))
+      .attr("y2", y(100))
+      .attr("stroke", "black")
+        .style("stroke-width", 0.5);
+
+  // center circle
+    svg2.append("circle")
+       .attr("cx", x(50))
+       .attr("cy", y(50))
+       .attr("r", x(10))
+       .attr("fill", "none")
+       .attr("stroke", "black")
+         .style("stroke-width", 0.5);
+    })
+}
+
+let goalsAndAssists = () =>{
+    // Parse the Data
+    d3.csv("https://gist.githubusercontent.com/Simon6HH/c15473ea2662122df2eceb7a60d57dd3/raw/7cc8a14ce1406f1456423b3e568eb859fbedc2c5/data.csv", function(data) {
+
+        // X axis
+      var x2 = d3.scaleBand()
+        .range([ 0, width ])
+        .domain(data.map(function(d) { return d.Name; }))
+        .padding(0.2);
+      svg2.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x2))
+        .selectAll("text")
+            .attr('fill', 'black')
+          .attr("transform", "translate(-10,0)rotate(-45)")
+          .style("text-anchor", "end");
+
+      // Add Y axis
+      var y2 = d3.scaleLinear()
+        .domain([0, 1200])
+        .range([ height, 0]);
+      svg2.append("g")
+        .call(d3.axisLeft(y2));
+
+      svg2.append("text")
+        .attr('y', -40)
+        .attr('x', -300)
+        .attr('fill', 'black')
+        .attr('transform', 'rotate(270 0 0)')
+        .text('Total Career Goals and Assists');
+
+      // Bars
+      svg2.selectAll("mybar")
+        .data(data)
+        .enter()
+        .append("rect")
+          .attr("x", function(d) { return x2(d.Name); })
+          .attr("width", x2.bandwidth())
+            // .attr("fill", function(d) {
+            // if (d = 41) {
+            // return "red";
+            // } else if (d != 41) {
+            // return "green";
+            // }
+            // return "green";
+            // })
+          //.attr("fill", "#69b3a2")
+            .attr("fill", "green")
+          // no bar at the beginning thus:
+          .attr("height", function(d) { return height - y2(0); }) // always equal to 0
+          .attr("y", function(d) { return y2(0); })
+
+      // Animation
+      svg2.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("y", function(d) { return y2(d.GoalsNAssists); })
+        .attr("height", function(d) { return height - y2(d.GoalsNAssists); })
+        .delay(function(d,i){console.log(i) ; return(i*100)})
+      
+      // FOOTBALL FIELD CODE BELOW THIS
+      
+      var x = d3.scale.linear()
+        .domain([0, 100])
+        .range([0, width]);
+
+      var y = d3.scale.linear()
+        .domain([0, 100])
+        .range([height, 0]);
+
+      svg2.append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("class", "mesh")
+        .attr("width", width)
+        .attr("height", height);
+
+      ///////////////////////
+      // add lines 
+
+      // field outline    
+        svg2.append("rect")
+           .attr("id","outline")
+           .attr("x", 0)
+           .attr("y", 0)
+           .attr("width", width)
+           .attr("height", height)
+           .attr("fill", "none")
+           .attr("stroke", "black")
+           .style("stroke-width", 0.5);
+      // right penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(83))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // right six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(94.2))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+      // right goal
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(100))
+          .attr("y", y(54.8))
+          .attr("width", margin.right)
+          .attr("height", y(45.2) - y(54.8))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // left penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(0))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(0))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // 50 yd line
+         svg2.append("line")
+          .attr("id","half")
+          .attr("x1", x(50))
+          .attr("x2", x(50))
+          .attr("y1", y(0))
+          .attr("y2", y(100))
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // center circle
+        svg2.append("circle")
+           .attr("cx", x(50))
+           .attr("cy", y(50))
+           .attr("r", x(10))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+    })
+}
+
+
+let assists = () => {
+    // Parse the Data
+    d3.csv("https://gist.githubusercontent.com/Simon6HH/04fd10244fa40727d4d59051e6575230/raw/27e2eec221d1dcc78c0e81af98d38f9e6e986e91/data.csv", function(data) {
+
+        // X axis
+      var x2 = d3.scaleBand()
+        .range([ 0, width ])
+        .domain(data.map(function(d) { return d.Name; }))
+        .padding(0.2);
+      svg2.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x2))
+        .selectAll("text")
+            .attr('fill', 'black')
+          .attr("transform", "translate(-10,0)rotate(-45)")
+          .style("text-anchor", "end");
+
+      // Add Y axis
+      var y2 = d3.scaleLinear()
+        .domain([0, 400])
+        .range([ height, 0]);
+      svg2.append("g")
+        .call(d3.axisLeft(y2));
+
+      svg2.append("text")
+        .attr('y', -40)
+        .attr('x', -270)
+        .attr('fill', 'black')
+        .attr('transform', 'rotate(270 0 0)')
+        .text('Total Career Assists');
+
+      // Bars
+      svg2.selectAll("mybar")
+        .data(data)
+        .enter()
+        .append("rect")
+          .attr("x", function(d) { return x2(d.Name); })
+          .attr("width", x2.bandwidth())
+            // .attr("fill", function(d) {
+            // if (d = 41) {
+            // return "red";
+            // } else if (d != 41) {
+            // return "green";
+            // }
+            // return "green";
+            // })
+          //.attr("fill", "#69b3a2")
+            .attr("fill", "green")
+          // no bar at the beginning thus:
+          .attr("height", function(d) { return height - y2(0); }) // always equal to 0
+          .attr("y", function(d) { return y2(0); })
+
+      // Animation
+      svg2.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("y", function(d) { return y2(d.Assists); })
+        .attr("height", function(d) { return height - y2(d.Assists); })
+        .delay(function(d,i){console.log(i) ; return(i*100)})
+      
+      // FOOTBALL FIELD CODE BELOW THIS
+      
+      var x = d3.scale.linear()
+        .domain([0, 100])
+        .range([0, width]);
+
+      var y = d3.scale.linear()
+        .domain([0, 100])
+        .range([height, 0]);
+
+      svg2.append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("class", "mesh")
+        .attr("width", width)
+        .attr("height", height);
+
+      ///////////////////////
+      // add lines 
+
+      // field outline    
+        svg2.append("rect")
+           .attr("id","outline")
+           .attr("x", 0)
+           .attr("y", 0)
+           .attr("width", width)
+           .attr("height", height)
+           .attr("fill", "none")
+           .attr("stroke", "black")
+           .style("stroke-width", 0.5);
+      // right penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(83))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // right six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(94.2))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+      // right goal
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(100))
+          .attr("y", y(54.8))
+          .attr("width", margin.right)
+          .attr("height", y(45.2) - y(54.8))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // left penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(0))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(0))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // 50 yd line
+         svg2.append("line")
+          .attr("id","half")
+          .attr("x1", x(50))
+          .attr("x2", x(50))
+          .attr("y1", y(0))
+          .attr("y2", y(100))
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // center circle
+        svg2.append("circle")
+           .attr("cx", x(50))
+           .attr("cy", y(50))
+           .attr("r", x(10))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+    })
+}
+
+let manOfTheMatch = () => {
+    // Parse the Data
+    d3.csv("https://gist.githubusercontent.com/Simon6HH/70282d0efb6f76a55a265b19fc48ec22/raw/8c538387cc520c14b8fcc52aae381c9fd9246c35/data.csv", function(data) {
+
+        // X axis
+      var x2 = d3.scaleBand()
+        .range([ 0, width ])
+        .domain(data.map(function(d) { return d.Name; }))
+        .padding(0.2);
+      svg2.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x2))
+        .selectAll("text")
+            .attr('fill', 'black')
+          .attr("transform", "translate(-10,0)rotate(-45)")
+          .style("text-anchor", "end");
+
+      // Add Y axis
+      var y2 = d3.scaleLinear()
+        .domain([0, 350])
+        .range([ height, 0]);
+      svg2.append("g")
+        .call(d3.axisLeft(y2));
+
+      svg2.append("text")
+        .attr('y', -40)
+        .attr('x', -340)
+        .attr('fill', 'black')
+        .attr('transform', 'rotate(270 0 0)')
+        .text('Total Man of the Match Awards Since 09/10');
+
+      // Bars
+      svg2.selectAll("mybar")
+        .data(data)
+        .enter()
+        .append("rect")
+          .attr("x", function(d) { return x2(d.Name); })
+          .attr("width", x2.bandwidth())
+            // .attr("fill", function(d) {
+            // if (d = 41) {
+            // return "red";
+            // } else if (d != 41) {
+            // return "green";
+            // }
+            // return "green";
+            // })
+          //.attr("fill", "#69b3a2")
+            .attr("fill", "green")
+          // no bar at the beginning thus:
+          .attr("height", function(d) { return height - y2(0); }) // always equal to 0
+          .attr("y", function(d) { return y2(0); })
+
+      // Animation
+      svg2.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("y", function(d) { return y2(d.MOTM); })
+        .attr("height", function(d) { return height - y2(d.MOTM); })
+        .delay(function(d,i){console.log(i) ; return(i*100)})
+      
+      // FOOTBALL FIELD CODE BELOW THIS
+      
+      var x = d3.scale.linear()
+        .domain([0, 100])
+        .range([0, width]);
+
+      var y = d3.scale.linear()
+        .domain([0, 100])
+        .range([height, 0]);
+
+      svg2.append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("class", "mesh")
+        .attr("width", width)
+        .attr("height", height);
+
+      ///////////////////////
+      // add lines 
+
+      // field outline    
+        svg2.append("rect")
+           .attr("id","outline")
+           .attr("x", 0)
+           .attr("y", 0)
+           .attr("width", width)
+           .attr("height", height)
+           .attr("fill", "none")
+           .attr("stroke", "black")
+           .style("stroke-width", 0.5);
+      // right penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(83))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // right six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(94.2))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+      // right goal
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(100))
+          .attr("y", y(54.8))
+          .attr("width", margin.right)
+          .attr("height", y(45.2) - y(54.8))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // left penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(0))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(0))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // 50 yd line
+         svg2.append("line")
+          .attr("id","half")
+          .attr("x1", x(50))
+          .attr("x2", x(50))
+          .attr("y1", y(0))
+          .attr("y2", y(100))
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // center circle
+        svg2.append("circle")
+           .attr("cx", x(50))
+           .attr("cy", y(50))
+           .attr("r", x(10))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+    })
+}
+
+//bar cart
+let goals = () => {
+          // Parse the Data
+    d3.csv("https://gist.githubusercontent.com/Simon6HH/eecdee09d0383aff6bf4b7419347cbaf/raw/85f5e893acc8d1be16edafcb638063275cbcee63/data.csv", function(data) {
+
+        // X axis
+      var x2 = d3.scaleBand()
+        .range([ 0, width ])
+        .domain(data.map(function(d) { return d.Name; }))
+        .padding(0.2);
+      svg2.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x2))
+        .selectAll("text")
+            .attr('fill', 'black')
+          .attr("transform", "translate(-10,0)rotate(-45)")
+          .style("text-anchor", "end");
+
+      // Add Y axis
+      var y2 = d3.scaleLinear()
+        .domain([500, 850])
+        .range([ height, 0]);
+      svg2.append("g")
+        .call(d3.axisLeft(y2));
+
+      svg2.append("text")
+        .attr('y', -40)
+        .attr('x', -270)
+        .attr('fill', 'black')
+        .attr('transform', 'rotate(270 0 0)')
+        .text('Total Career Goals');
+
+      // Bars
+      svg2.selectAll("mybar")
+        .data(data)
+        .enter()
+        .append("rect")
+          .attr("x", function(d) { return x2(d.Name); })
+          .attr("width", x2.bandwidth())
+            // .attr("fill", function(d) {
+            // if (d = 41) {
+            // return "red";
+            // } else if (d != 41) {
+            // return "green";
+            // }
+            // return "green";
+            // })
+          //.attr("fill", "#69b3a2")
+            .attr("fill", "green")
+          // no bar at the beginning thus:
+          .attr("height", function(d) { return height - y2(0); }) // always equal to 0
+          .attr("y", function(d) { return y2(0); })
+
+      // Animation
+      svg2.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("y", function(d) { return y2(d.Goals); })
+        .attr("height", function(d) { return height - y2(d.Goals); })
+        .delay(function(d,i){console.log(i) ; return(i*100)})
+      
+      // FOOTBALL FIELD CODE BELOW THIS
+      
+      var x = d3.scale.linear()
+        .domain([0, 100])
+        .range([0, width]);
+
+      var y = d3.scale.linear()
+        .domain([0, 100])
+        .range([height, 0]);
+
+      svg2.append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("class", "mesh")
+        .attr("width", width)
+        .attr("height", height);
+
+      ///////////////////////
+      // add lines 
+
+      // field outline    
+        svg2.append("rect")
+           .attr("id","outline")
+           .attr("x", 0)
+           .attr("y", 0)
+           .attr("width", width)
+           .attr("height", height)
+           .attr("fill", "none")
+           .attr("stroke", "black")
+           .style("stroke-width", 0.5);
+      // right penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(83))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // right six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(94.2))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+      // right goal
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(100))
+          .attr("y", y(54.8))
+          .attr("width", margin.right)
+          .attr("height", y(45.2) - y(54.8))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // left penalty area 
+        svg2.append("rect")
+           .attr("id","six")
+           .attr("x", x(0))
+           .attr("y", y(78.9))
+           .attr("width", x(100) - x(83))
+           .attr("height", y(21.1) - y(78.9))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+      // six yard box
+        svg2.append("rect")
+          .attr("id","penarea")
+          .attr("x", x(0))
+          .attr("y", y(63.2))
+          .attr("width", x(100) - x(94.2))
+          .attr("height", y(36.8) - y(63.2))
+          .attr("fill", "none")
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // 50 yd line
+         svg2.append("line")
+          .attr("id","half")
+          .attr("x1", x(50))
+          .attr("x2", x(50))
+          .attr("y1", y(0))
+          .attr("y2", y(100))
+          .attr("stroke", "black")
+            .style("stroke-width", 0.5);
+
+      // center circle
+        svg2.append("circle")
+           .attr("cx", x(50))
+           .attr("cy", y(50))
+           .attr("r", x(10))
+           .attr("fill", "none")
+           .attr("stroke", "black")
+             .style("stroke-width", 0.5);
+    })
+
+}
+
+
+
+//waypoints scroll constructor
+function scroll(n, offset, func1, func2){
+    return new Waypoint({
+        element: document.getElementById(n),
+        handler: function(direction) {
+            if(direction == 'down'){
+                func1()
+                svg2.selectAll("*").remove();
+            }
+            else{
+                func2()
+                svg2.selectAll("*").remove();
+
+            }
+            //direction == 'down' ? func1() : ;
+        },
+        //start 75% from the top of the div
+        offset: offset
+    });
+};
+
+
+//triger these functions on page scroll
+new scroll('div2', '500', goals, trophies);
+// new scroll('div4', '500', divide, grid2);
+new scroll('div3', '500', assists, goals);
+new scroll('div4', '500', goalsAndAssists, assists);
+new scroll('div5', '500', manOfTheMatch, goalsAndAssists);
+
+
+
+
+//start grid on page load
+trophies();
+
+
+
+    
+</script>
+
+
+
+
+</body>
+</html>
+
