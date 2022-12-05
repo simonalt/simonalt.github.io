@@ -11,10 +11,10 @@
 
 <!-- Add 4 buttons -->
 <body>
-	<button onclick="update('Goals')">Goals</button>
-	<button onclick="update('GoalsConceded')">Goals Conceded</button>
-	<button onclick="update('Titles')">Titles</button>
-	<button onclick="update('LeaguePoints')">League Points</button>
+  <button onclick="update('Goals')">Goals</button>
+  <button onclick="update('GoalsConceded')">Goals Conceded</button>
+  <button onclick="update('Titles')">Titles</button>
+  <button onclick="update('LeaguePoints')">League Points</button>
 </body>
 
 <!-- Load d3.js -->
@@ -24,7 +24,7 @@
 <div id="my_dataviz"></div>
 
 <script>
-	// set the dimensions and margins of the graph
+  // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 70, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
@@ -58,6 +58,8 @@ function update(selectedVar) {
   // Parse the Data
   d3.csv("https://gist.githubusercontent.com/Simon6HH/afedcb7d5c901a8183db10a27dded3c7/raw/2820c3dca233cc250b8a842d5bea91564993c66d/data.csv", function(data) {
 
+    
+
     // X axis
     x.domain(data.map(function(d) { return d.Year; }))
     xAxis.transition().duration(1000).call(d3.axisBottom(x))
@@ -82,6 +84,13 @@ function update(selectedVar) {
         .attr("y1", y(0))
         .attr("y2", function(d) { return y(d[selectedVar]); })
         .attr("stroke", "grey")
+
+    svg.append("text")
+      .attr('y', 350)
+      .attr('x', -48)
+      .style("font", "18px times")
+      .attr('fill', "#69b3a2")
+      .text('Goals, Goals Conceded, Titles and League Points Comparator');
 
 
     // variable u: map data to existing circle
