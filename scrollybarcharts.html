@@ -129,7 +129,7 @@
 <script>
 
     var plotscale = 750
-    var margin = {top: plotscale * (14.86/960), 
+    var margin = {top: plotscale * (14.86/960) + 50, 
               right: plotscale * (20/960), 
               bottom: plotscale * (24/960) + 60, 
               left: plotscale * (40/960) + 30},
@@ -178,14 +178,14 @@ let trophies = () =>{
 
     svg2.append("text")
       .attr('y', -40)
-      .attr('x', -250)
+      .attr('x', -220)
       .attr('fill', 'black')
       .attr('transform', 'rotate(270 0 0)')
       .style("font", "15px times")
       .text('Trophy Count');
 
     svg2.append("text")
-        .attr('y', 50)
+        .attr('y', -15)
         .attr('x', 100)
         .style("font", "30px times")
         .attr('fill', 'black')
@@ -244,6 +244,62 @@ let trophies = () =>{
          .attr("fill", "none")
          .attr("stroke", "black")
          .style("stroke-width", 0.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 23.5)
+        .attr("x2", 0)
+        .attr("y2", 23.5); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 69.5)
+        .attr("x2", 0)
+        .attr("y2", 69.5); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 115.5)
+        .attr("x2", 0)
+        .attr("y2", 115.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 161.5)
+        .attr("x2", 0)
+        .attr("y2", 161.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 207.5)
+        .attr("x2", 0)
+        .attr("y2", 207.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 253.5)
+        .attr("x2", 0)
+        .attr("y2", 253.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 299.5)
+        .attr("x2", 0)
+        .attr("y2", 299.5);
     // // right penalty area 
     //   svg2.append("rect")
     //      .attr("id","six")
@@ -324,14 +380,14 @@ let goalsAndAssists = () =>{
 
       svg2.append("text")
         .attr('y', -40)
-        .attr('x', -300)
+        .attr('x', -270)
         .attr('fill', 'black')
         .attr('transform', 'rotate(270 0 0)')
         .style("font", "15px times")
         .text('Career Goals and Assists Count');
 
       svg2.append("text")
-        .attr('y', 35)
+        .attr('y', -15)
         .attr('x', 150)
         .style("font", "30px times")
         .attr('fill', 'black')
@@ -401,6 +457,94 @@ let goalsAndAssists = () =>{
            .attr("fill", "none")
            .attr("stroke", "black")
            .style("stroke-width", 0.5);
+
+        svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 29.5)
+        .attr("x2", 0)
+        .attr("y2", 29.5); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 58.5)
+        .attr("x2", 0) // 29
+        .attr("y2", 58.5); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 87.5)
+        .attr("x2", 0)
+        .attr("y2", 87.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 115.5)
+        .attr("x2", 0)
+        .attr("y2", 115.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 144.5)
+        .attr("x2", 0)
+        .attr("y2", 144.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 173)
+        .attr("x2", 0)
+        .attr("y2", 173);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 202)
+        .attr("x2", 0)
+        .attr("y2", 202);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 230.5)
+        .attr("x2", 0)
+        .attr("y2", 230.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 259)
+        .attr("x2", 0)
+        .attr("y2", 259);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 287.5)
+        .attr("x2", 0)
+        .attr("y2", 287.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 316)
+        .attr("x2", 0)
+        .attr("y2", 316);
       // // right penalty area 
       //   svg2.append("rect")
       //      .attr("id","six")
@@ -483,14 +627,14 @@ let assists = () => {
 
       svg2.append("text")
         .attr('y', -40)
-        .attr('x', -240)
+        .attr('x', -210)
         .attr('fill', 'black')
         .attr('transform', 'rotate(270 0 0)')
         .style("font", "15px times")
         .text('Assists Count');
 
       svg2.append("text")
-        .attr('y', 50)
+        .attr('y', -15)
         .attr('x', 200)
         .style("font", "30px times")
         .attr('fill', 'black')
@@ -550,6 +694,62 @@ let assists = () => {
            .attr("fill", "none")
            .attr("stroke", "black")
            .style("stroke-width", 0.5);
+
+        svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 44)
+        .attr("x2", 0)
+        .attr("y2", 44); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 87)
+        .attr("x2", 0)
+        .attr("y2", 87); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 130)
+        .attr("x2", 0)
+        .attr("y2", 130);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 173)
+        .attr("x2", 0)
+        .attr("y2", 173);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 216)
+        .attr("x2", 0)
+        .attr("y2", 216);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 259)
+        .attr("x2", 0)
+        .attr("y2", 259);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 303)
+        .attr("x2", 0)
+        .attr("y2", 303);
       // // right penalty area 
       //   svg2.append("rect")
       //      .attr("id","six")
@@ -630,14 +830,14 @@ let manOfTheMatch = () => {
 
       svg2.append("text")
         .attr('y', -40)
-        .attr('x', -340)
+        .attr('x', -310)
         .attr('fill', 'black')
         .attr('transform', 'rotate(270 0 0)')
         .style("font", "15px times")
         .text('Total Man of the Match Awards Since 09/10');
 
       svg2.append("text")
-        .attr('y', 50)
+        .attr('y', -15)
         .attr('x', 150)
         .style("font", "30px times")
         .attr('fill', 'black')
@@ -707,6 +907,54 @@ let manOfTheMatch = () => {
            .attr("fill", "none")
            .attr("stroke", "black")
            .style("stroke-width", 0.5);
+
+        svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 50)
+        .attr("x2", 0)
+        .attr("y2", 50); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 99)
+        .attr("x2", 0)
+        .attr("y2", 99); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 148)
+        .attr("x2", 0)
+        .attr("y2", 148);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 197.5)
+        .attr("x2", 0)
+        .attr("y2", 197.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 247)
+        .attr("x2", 0)
+        .attr("y2", 247);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 297)
+        .attr("x2", 0)
+        .attr("y2", 297);
       // // right penalty area 
       //   svg2.append("rect")
       //      .attr("id","six")
@@ -788,14 +1036,14 @@ let goals = () => {
 
       svg2.append("text")
         .attr('y', -40)
-        .attr('x', -270)
+        .attr('x', -240)
         .attr('fill', 'black')
         .attr('transform', 'rotate(270 0 0)')
         .style("font", "15px times")
         .text('Career Goals Count');
 
       svg2.append("text")
-        .attr('y', 50)
+        .attr('y', -15)
         .attr('x', 165)
         .style("font", "30px times")
         .attr('fill', 'black')
@@ -865,6 +1113,54 @@ let goals = () => {
            .attr("fill", "none")
            .attr("stroke", "black")
            .style("stroke-width", 0.5);
+
+        svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 50)
+        .attr("x2", 0)
+        .attr("y2", 50); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 99)
+        .attr("x2", 0)
+        .attr("y2", 99); 
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 148)
+        .attr("x2", 0)
+        .attr("y2", 148);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 197.5)
+        .attr("x2", 0)
+        .attr("y2", 197.5);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 247)
+        .attr("x2", 0)
+        .attr("y2", 247);
+
+      svg2.append('line')
+        .style("stroke", "black")
+        .style("stroke-width", 0.1)
+        .attr("x1", 673)
+        .attr("y1", 297)
+        .attr("x2", 0)
+        .attr("y2", 297);
       // // right penalty area 
       //   svg2.append("rect")
       //      .attr("id","six")
