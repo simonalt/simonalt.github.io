@@ -151,6 +151,8 @@ let grid1 = () =>{
 }
 
 let trophies = () =>{
+
+    
     // Parse the Data
   d3.csv("https://gist.githubusercontent.com/simonalt/7be5539d81bf75c7ed487637b47ee90f/raw/86647874a5053aab698adf9d2c801f3f8ba79a73/trophies.csv", function(data) {
 
@@ -176,10 +178,19 @@ let trophies = () =>{
 
     svg2.append("text")
       .attr('y', -40)
-      .attr('x', -270)
+      .attr('x', -230)
       .attr('fill', 'black')
       .attr('transform', 'rotate(270 0 0)')
-      .text('Total Career Trophies');
+      .text('Trophy Count');
+
+    svg2.append("text")
+        .attr('y', 50)
+        .attr('x', 100)
+        .style("font", "30px times")
+        .attr('fill', 'black')
+        .text('Most Trophies Won By a Player in History');
+
+    var color = ["green", "maroon", "green", "green", "green", "green", "green", "green", "green", "green"]
 
     // Bars
     svg2.selectAll("mybar")
@@ -188,19 +199,11 @@ let trophies = () =>{
       .append("rect")
         .attr("x", function(d) { return x2(d.Name); })
         .attr("width", x2.bandwidth())
-          // .attr("fill", function(d) {
-          // if (d = 41) {
-          // return "red";
-          // } else if (d != 41) {
-          // return "green";
-          // }
-          // return "green";
-          // })
-        //.attr("fill", "#69b3a2")
-          .attr("fill", "green")
-        // no bar at the beginning thus:
         .attr("height", function(d) { return height - y2(0); }) // always equal to 0
         .attr("y", function(d) { return y2(0); })
+        .attr("fill", function(d, i) {
+          return color[i%10] // here it is picking up colors in sequence
+        })
 
     // Animation
     svg2.selectAll("rect")
@@ -291,25 +294,6 @@ let trophies = () =>{
         .attr("fill", "none")
         .attr("stroke", "black")
           .style("stroke-width", 0.5);
-
-    // 50 yd line
-       svg2.append("line")
-        .attr("id","half")
-        .attr("x1", x(50))
-        .attr("x2", x(50))
-        .attr("y1", y(0))
-        .attr("y2", y(100))
-        .attr("stroke", "black")
-          .style("stroke-width", 0.5);
-
-    // center circle
-      svg2.append("circle")
-         .attr("cx", x(50))
-         .attr("cy", y(50))
-         .attr("r", x(10))
-         .attr("fill", "none")
-         .attr("stroke", "black")
-           .style("stroke-width", 0.5);
       })
 }
 
@@ -342,7 +326,16 @@ let goalsAndAssists = () =>{
         .attr('x', -300)
         .attr('fill', 'black')
         .attr('transform', 'rotate(270 0 0)')
-        .text('Total Career Goals and Assists');
+        .text('Career Goals and Assists Count');
+
+      svg2.append("text")
+        .attr('y', 35)
+        .attr('x', 150)
+        .style("font", "30px times")
+        .attr('fill', 'black')
+        .text('Most Goals and Assists in History');
+
+      var color = ["maroon", "green", "green", "green", "green", "green", "green", "green", "green", "green"]
 
       // Bars
       svg2.selectAll("mybar")
@@ -364,6 +357,9 @@ let goalsAndAssists = () =>{
           // no bar at the beginning thus:
           .attr("height", function(d) { return height - y2(0); }) // always equal to 0
           .attr("y", function(d) { return y2(0); })
+          .attr("fill", function(d, i) {
+            return color[i%10] // here it is picking up colors in sequence
+          })
 
       // Animation
       svg2.selectAll("rect")
@@ -454,30 +450,12 @@ let goalsAndAssists = () =>{
           .attr("fill", "none")
           .attr("stroke", "black")
             .style("stroke-width", 0.5);
-
-      // 50 yd line
-         svg2.append("line")
-          .attr("id","half")
-          .attr("x1", x(50))
-          .attr("x2", x(50))
-          .attr("y1", y(0))
-          .attr("y2", y(100))
-          .attr("stroke", "black")
-            .style("stroke-width", 0.5);
-
-      // center circle
-        svg2.append("circle")
-           .attr("cx", x(50))
-           .attr("cy", y(50))
-           .attr("r", x(10))
-           .attr("fill", "none")
-           .attr("stroke", "black")
-             .style("stroke-width", 0.5);
     })
 }
 
 
 let assists = () => {
+
     // Parse the Data
     d3.csv("https://gist.githubusercontent.com/Simon6HH/04fd10244fa40727d4d59051e6575230/raw/27e2eec221d1dcc78c0e81af98d38f9e6e986e91/data.csv", function(data) {
 
@@ -503,10 +481,19 @@ let assists = () => {
 
       svg2.append("text")
         .attr('y', -40)
-        .attr('x', -270)
+        .attr('x', -240)
         .attr('fill', 'black')
         .attr('transform', 'rotate(270 0 0)')
-        .text('Total Career Assists');
+        .text('Assists Count');
+
+      svg2.append("text")
+        .attr('y', 50)
+        .attr('x', 200)
+        .style("font", "30px times")
+        .attr('fill', 'black')
+        .text('Top Assisters in History');
+
+      var color = ["maroon", "green", "green", "green", "green", "green", "green", "green", "green", "green"]
 
       // Bars
       svg2.selectAll("mybar")
@@ -515,19 +502,12 @@ let assists = () => {
         .append("rect")
           .attr("x", function(d) { return x2(d.Name); })
           .attr("width", x2.bandwidth())
-            // .attr("fill", function(d) {
-            // if (d = 41) {
-            // return "red";
-            // } else if (d != 41) {
-            // return "green";
-            // }
-            // return "green";
-            // })
-          //.attr("fill", "#69b3a2")
-            .attr("fill", "green")
-          // no bar at the beginning thus:
           .attr("height", function(d) { return height - y2(0); }) // always equal to 0
           .attr("y", function(d) { return y2(0); })
+          //.attr("fill", "green");
+          .attr("fill", function(d, i) {
+            return color[i%10] // here it is picking up colors in sequence
+          })
 
       // Animation
       svg2.selectAll("rect")
@@ -618,25 +598,6 @@ let assists = () => {
           .attr("fill", "none")
           .attr("stroke", "black")
             .style("stroke-width", 0.5);
-
-      // 50 yd line
-         svg2.append("line")
-          .attr("id","half")
-          .attr("x1", x(50))
-          .attr("x2", x(50))
-          .attr("y1", y(0))
-          .attr("y2", y(100))
-          .attr("stroke", "black")
-            .style("stroke-width", 0.5);
-
-      // center circle
-        svg2.append("circle")
-           .attr("cx", x(50))
-           .attr("cy", y(50))
-           .attr("r", x(10))
-           .attr("fill", "none")
-           .attr("stroke", "black")
-             .style("stroke-width", 0.5);
     })
 }
 
@@ -671,6 +632,15 @@ let manOfTheMatch = () => {
         .attr('transform', 'rotate(270 0 0)')
         .text('Total Man of the Match Awards Since 09/10');
 
+      svg2.append("text")
+        .attr('y', 50)
+        .attr('x', 150)
+        .style("font", "30px times")
+        .attr('fill', 'black')
+        .text('Most Man of the Match Awards');
+
+      var color = ["maroon", "green", "green", "green", "green", "green", "green", "green", "green", "green"]
+
       // Bars
       svg2.selectAll("mybar")
         .data(data)
@@ -691,6 +661,9 @@ let manOfTheMatch = () => {
           // no bar at the beginning thus:
           .attr("height", function(d) { return height - y2(0); }) // always equal to 0
           .attr("y", function(d) { return y2(0); })
+          .attr("fill", function(d, i) {
+            return color[i%10] // here it is picking up colors in sequence
+          })
 
       // Animation
       svg2.selectAll("rect")
@@ -781,25 +754,6 @@ let manOfTheMatch = () => {
           .attr("fill", "none")
           .attr("stroke", "black")
             .style("stroke-width", 0.5);
-
-      // 50 yd line
-         svg2.append("line")
-          .attr("id","half")
-          .attr("x1", x(50))
-          .attr("x2", x(50))
-          .attr("y1", y(0))
-          .attr("y2", y(100))
-          .attr("stroke", "black")
-            .style("stroke-width", 0.5);
-
-      // center circle
-        svg2.append("circle")
-           .attr("cx", x(50))
-           .attr("cy", y(50))
-           .attr("r", x(10))
-           .attr("fill", "none")
-           .attr("stroke", "black")
-             .style("stroke-width", 0.5);
     })
 }
 
@@ -833,7 +787,16 @@ let goals = () => {
         .attr('x', -270)
         .attr('fill', 'black')
         .attr('transform', 'rotate(270 0 0)')
-        .text('Total Career Goals');
+        .text('Career Goals Count');
+
+      svg2.append("text")
+        .attr('y', 50)
+        .attr('x', 165)
+        .style("font", "30px times")
+        .attr('fill', 'black')
+        .text('Most Career Goals in History');
+
+      var color = ["green", "green", "maroon", "green", "green", "green", "green", "green", "green", "green"]
 
       // Bars
       svg2.selectAll("mybar")
@@ -855,6 +818,9 @@ let goals = () => {
           // no bar at the beginning thus:
           .attr("height", function(d) { return height - y2(0); }) // always equal to 0
           .attr("y", function(d) { return y2(0); })
+          .attr("fill", function(d, i) {
+            return color[i%10] // here it is picking up colors in sequence
+          })
 
       // Animation
       svg2.selectAll("rect")
@@ -945,25 +911,6 @@ let goals = () => {
           .attr("fill", "none")
           .attr("stroke", "black")
             .style("stroke-width", 0.5);
-
-      // 50 yd line
-         svg2.append("line")
-          .attr("id","half")
-          .attr("x1", x(50))
-          .attr("x2", x(50))
-          .attr("y1", y(0))
-          .attr("y2", y(100))
-          .attr("stroke", "black")
-            .style("stroke-width", 0.5);
-
-      // center circle
-        svg2.append("circle")
-           .attr("cx", x(50))
-           .attr("cy", y(50))
-           .attr("r", x(10))
-           .attr("fill", "none")
-           .attr("stroke", "black")
-             .style("stroke-width", 0.5);
     })
 
 }
