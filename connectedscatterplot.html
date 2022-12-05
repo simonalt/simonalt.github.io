@@ -25,9 +25,9 @@ Connected Scatterplot: Playstyle Change
 
 <script>
 	// set the dimensions and margins of the graph
-	var margin = {top: 10, right: 100, bottom: 30, left: 55},
+	var margin = {top: 10, right: 100, bottom: 50, left: 55},
     width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 450 - margin.top - margin.bottom;
 
 	// append the svg object to the body of the page
 	var svg = d3.select("#my_dataviz")
@@ -39,7 +39,7 @@ Connected Scatterplot: Playstyle Change
 	          "translate(" + margin.left + "," + margin.top + ")");
 
 	//Read the data
-	d3.csv("https://gist.githubusercontent.com/Simon6HH/beff462ec2693c9a92ca2a586c78a589/raw/377b32d280b7d3abc7533d7b1b7ca76af010399a/data.csv", function(data) {
+	d3.csv("https://gist.githubusercontent.com/simonalt/5e8b53b3f909a9e8fa4bddefb411b0fe/raw/f9b0e2566c6b04a62f0bd3cfdf1ec449550ab461/data.csv", function(data) {
 
 	    // List of groups (here I have one group per column)
 	    var allGroup = ["LiveBallPasses", "DeadBallPasses", "PassesCompletedThroughDefensiveLine", "Crosses"]
@@ -76,6 +76,13 @@ Connected Scatterplot: Playstyle Change
 	      .attr('transform', 'rotate(270 0 0)')
 	      .text('Number of Passes');
 
+	     svg.append("text")
+	      .attr('y', 435)
+	      .attr('x', -30)
+	      .style("font", "15px times")
+	      .attr('fill', "#69b3a2")
+	      .text('Different Pass Types Depicting Changing Playstyle Over Time');
+
 	    // Initialize line with group a
 	    var line = svg
 	      .append('g')
@@ -103,6 +110,9 @@ Connected Scatterplot: Playstyle Change
 
 	    // A function that update the chart
 	    function update(selectedGroup) {
+
+
+	      
 
 	      // Create new data with the selection?
 	      var dataFilter = data.map(function(d){return {time: d.Months, value:d[selectedGroup]} })
