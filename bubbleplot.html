@@ -87,12 +87,30 @@ d3.csv("https://gist.githubusercontent.com/simonalt/eef8aae608788df16c87b3f71465
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
     .domain(["2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"])
-  	.range(["#EA61E2", "#E2EA61", "#EA7261", "#61ACEA", "#61EA95", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5"]);
+  	.range(["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5", "#D5D2D5"]);
 
 
   // ---------------------------//
   //      TOOLTIP               //
   // ---------------------------//
+
+  function hover(elem) {
+    var attrs = elem.srcElement.attributes;
+      let id = attrs['data-id'].value;
+      let path = city.select('#' + id)
+      let pathStroke = path.style("stroke");
+
+      if (path.attr('visibility') == 'visible') {
+        //make every path gray and less visible
+        city.select("path")
+          .transition()
+        .style("stroke", "gray")
+        .style("opacity", "0.25");
+      path.style("stroke", pathStroke)
+        .transition()
+        .style("opacity", "1");
+      }
+  }
 
   // -1- Create a tooltip div that is hidden by default:
   var tooltip = d3.select("#my_dataviz")
@@ -208,7 +226,7 @@ d3.csv("https://gist.githubusercontent.com/simonalt/eef8aae608788df16c87b3f71465
       .append("text")
         .attr('x', xLabel)
         .attr('y', function(d){ return height - 100 - z(d) } )
-        .text( function(d){ return d / 55.5663717 } )
+        .text( function(d){ return (d / 55.5663717).toFixed(2); })
         .style("font-size", 10)
         .attr('alignment-baseline', 'middle')
 
