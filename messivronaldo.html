@@ -39,7 +39,7 @@ src="https://d3js.org/d3.v4.js">
             "translate(" + margin.left + "," + margin.top + ")");
 
   // Parse the Data
-  d3.csv("https://gist.githubusercontent.com/Simon6HH/cdb6822c7a756603d910bc60d935465d/raw/6d938caff3f145c51768133119af15492ef0077c/data.csv", function(data) {
+  d3.csv("https://gist.githubusercontent.com/simonalt/39a7afccd07019447dd566b5455c3fe9/raw/1ee36c401f0fcc2029e574b64211692581b9fde1/data.csv", function(data) {
 
 
     // Add X axis
@@ -63,6 +63,12 @@ src="https://d3js.org/d3.v4.js">
       .attr('x', 170)
       .attr('fill', 'black')
       .text('Head to Head Goals per Season: Messi vs Ronaldo');
+
+    svg.append("text")
+      .attr('y', 420)
+      .attr('x', 240)
+      .attr('fill', 'black')
+      .text('Number of Goals per Season');
 
     // Lines
     svg.selectAll("myline")
@@ -135,6 +141,177 @@ src="https://d3js.org/d3.v4.js">
     ///////////////////////
     // add lines 
 
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(20))
+        .attr("y2", y(20))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(30))
+        .attr("y2", y(30))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(25))
+        .attr("y2", y(25))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(35))
+        .attr("y2", y(35))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(40))
+        .attr("y2", y(40))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(45))
+        .attr("y2", y(45))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(50))
+        .attr("y2", y(50))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(55))
+        .attr("y2", y(55))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(60))
+        .attr("y2", y(60))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(65))
+        .attr("y2", y(65))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(70))
+        .attr("y2", y(70))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(75))
+        .attr("y2", y(75))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(80))
+        .attr("y2", y(80))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(85))
+        .attr("y2", y(85))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(90))
+        .attr("y2", y(90))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(95))
+        .attr("y2", y(95))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(15))
+        .attr("y2", y(15))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(10))
+        .attr("y2", y(10))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(100))
+        .attr("x2", x(0))
+        .attr("y1", y(5))
+        .attr("y2", y(5))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
     // field outline    
       svg.append("rect")
          .attr("id","outline")
@@ -145,57 +322,33 @@ src="https://d3js.org/d3.v4.js">
          .attr("fill", "none")
          .attr("stroke", "black")
          .style("stroke-width", 0.5);
-    // right penalty area 
-      svg.append("rect")
-         .attr("id","six")
-         .attr("x", x(83))
-         .attr("y", y(78.9))
-         .attr("width", x(100) - x(83))
-         .attr("height", y(21.1) - y(78.9))
-         .attr("fill", "none")
-         .attr("stroke", "black")
-         .style("stroke-width", 0.5);
-    // right six yard box
-      svg.append("rect")
-        .attr("id","penarea")
-        .attr("x", x(94.2))
-        .attr("y", y(63.2))
-        .attr("width", x(100) - x(94.2))
-        .attr("height", y(36.8) - y(63.2))
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .style("stroke-width", 0.5);
-    // right goal
-      svg.append("rect")
-        .attr("id","penarea")
-        .attr("x", x(100))
-        .attr("y", y(54.8))
-        .attr("width", margin.right)
-        .attr("height", y(45.2) - y(54.8))
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .style("stroke-width", 0.5);
 
-    // left penalty area 
-      svg.append("rect")
-         .attr("id","six")
-         .attr("x", x(0))
-         .attr("y", y(78.9))
-         .attr("width", x(100) - x(83))
-         .attr("height", y(21.1) - y(78.9))
-         .attr("fill", "none")
-         .attr("stroke", "black")
-         .style("stroke-width", 0.5);
-    // six yard box
-      svg.append("rect")
-        .attr("id","penarea")
-        .attr("x", x(0))
-        .attr("y", y(63.2))
-        .attr("width", x(100) - x(94.2))
-        .attr("height", y(36.8) - y(63.2))
-        .attr("fill", "none")
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(12.5))
+        .attr("x2", x(12.5))
+        .attr("y1", y(0))
+        .attr("y2", y(100))
         .attr("stroke", "black")
-        .style("stroke-width", 0.5);
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(25))
+        .attr("x2", x(25))
+        .attr("y1", y(0))
+        .attr("y2", y(100))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(37.5))
+        .attr("x2", x(37.5))
+        .attr("y1", y(0))
+        .attr("y2", y(100))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
 
     // 50 yd line
        svg.append("line")
@@ -205,16 +358,34 @@ src="https://d3js.org/d3.v4.js">
         .attr("y1", y(0))
         .attr("y2", y(100))
         .attr("stroke", "black")
-        .style("stroke-width", 0.5);
+        .style("stroke-width", 0.1);
 
-    // center circle
-      svg.append("circle")
-         .attr("cx", x(50))
-         .attr("cy", y(50))
-         .attr("r", x(10))
-         .attr("fill", "none")
-         .attr("stroke", "black")
-         .style("stroke-width", 0.5);
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(62.5))
+        .attr("x2", x(62.5))
+        .attr("y1", y(0))
+        .attr("y2", y(100))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(75))
+        .attr("x2", x(75))
+        .attr("y1", y(0))
+        .attr("y2", y(100))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
+
+      svg.append("line")
+        .attr("id","half")
+        .attr("x1", x(87.5))
+        .attr("x2", x(87.5))
+        .attr("y1", y(0))
+        .attr("y2", y(100))
+        .attr("stroke", "black")
+        .style("stroke-width", 0.1);
     })
   </script>
 </html>
